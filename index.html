@@ -236,21 +236,33 @@
     </div>
   </footer>
 
-  <!-- scroll fade-in (repeatable): fades a block in when it enters view, resets it
-       once it is fully off-screen, so it fades in again next time it re-enters.
-       Reads all rects before writing classes to avoid layout thrashing. -->
+  <!-- scroll fade-in (staggered, repeatable): each photo/text block fades in as it
+       enters view, blocks entering together cascade top-to-bottom, and a block resets
+       once fully off-screen so it fades in again next time. Rects are read before any
+       class writes to avoid layout thrashing. -->
   <script>
   (function () {
-    var els = document.querySelectorAll('.concept .inner, .works .works-head, .works .cat, .about .inner, .ig-band .inner, .contact .inner, .site-footer .inner');
+    var els = document.querySelectorAll('.concept .eyebrow, .concept .concept-tagline, .concept .lead, .works .works-head, .works .cat-head, .works .grid > *, .about .eyebrow, .about-photo, .about .name, .about .lead, .about-history, .about .gear, .ig-band .eyebrow, .ig-band .section-title, .ig-band .lead, .ig-band .btn-wrap, .ig-band .handle, .contact .eyebrow, .contact .section-title, .contact .lead, .contact .btn-row, .site-footer .fmark, .site-footer .flinks, .site-footer .copy');
     if (!els.length) return;
     function scan() {
-      var h = window.innerHeight || document.documentElement.clientHeight, i, changes = [];
+      var h = window.innerHeight || document.documentElement.clientHeight, i, info = [], show = [];
       for (i = 0; i < els.length; i++) {
-        var el = els[i], r = el.getBoundingClientRect(), vis = el.classList.contains('is-visible');
-        if (vis) { if (r.bottom <= 0 || r.top >= h) changes.push([el, false]); }       // fully off-screen → reset
-        else if (r.top < h * 0.85 && r.bottom > h * 0.15) changes.push([el, true]);      // entered view → fade in
+        var el = els[i], r = el.getBoundingClientRect();
+        info.push({ el: el, top: r.top, bottom: r.bottom, vis: el.classList.contains('is-visible') });
       }
-      for (i = 0; i < changes.length; i++) changes[i][0].classList.toggle('is-visible', changes[i][1]);
+      for (i = 0; i < info.length; i++) {
+        var d = info[i];
+        if (d.vis) {
+          if (d.bottom <= 0 || d.top >= h) { d.el.classList.remove('is-visible'); d.el.style.removeProperty('--d'); }
+        } else if (d.top < h * 0.85 && d.bottom > 0) {
+          show.push(d);
+        }
+      }
+      show.sort(function (a, b) { return a.top - b.top; });
+      for (i = 0; i < show.length; i++) {
+        show[i].el.style.setProperty('--d', (0.1 + i * 0.12).toFixed(2) + 's');
+        show[i].el.classList.add('is-visible');
+      }
     }
     scan();
     window.addEventListener('scroll', scan, { passive: true });

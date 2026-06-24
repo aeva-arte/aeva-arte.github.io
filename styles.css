@@ -142,35 +142,24 @@ a { color: inherit; text-decoration: none; }
 .ph--tall  { aspect-ratio: 4 / 5; }
 .ph--hero  { aspect-ratio: 16 / 10; }
 
-/* ---- scroll reveal (fade-in, repeats each time a block re-enters view) --- */
-/* Active only when JS adds `.js` to <html>. No JS → content shows normally. */
-/* Slow fade IN (.is-visible), but the reset is instant and happens off-screen. */
-.js .concept .inner,
-.js .works .works-head,
-.js .works .cat,
-.js .about .inner,
-.js .ig-band .inner,
-.js .contact .inner,
-.js .site-footer .inner {
-  opacity: 0;
-  transform: translateY(22px);
-  transition: opacity 0s, transform 0s;
-}
-.js .is-visible {
-  opacity: 1 !important;
-  transform: none !important;
-  transition: opacity 2.5s ease 0.2s, transform 2.7s cubic-bezier(.2, .7, .2, 1) 0.2s !important;
-}
-@media (prefers-reduced-motion: reduce) {
-  .js .concept .inner,
-  .js .works .works-head,
-  .js .works .cat,
-  .js .about .inner,
-  .js .ig-band .inner,
-  .js .contact .inner,
-  .js .site-footer .inner {
+/* ---- scroll reveal (fade-in, staggered per block, repeatable) -------- */
+/* Active only when JS adds `.js` to <html>. No JS / reduced-motion → content shows normally. */
+/* Slow fade IN (.is-visible) with a per-element delay (--d, set by JS for the stagger);
+   the reset is instant and happens off-screen. */
+@media (prefers-reduced-motion: no-preference) {
+  .js .concept .eyebrow, .js .concept .concept-tagline, .js .concept .lead,
+  .js .works .works-head, .js .works .cat-head, .js .works .grid > *,
+  .js .about .eyebrow, .js .about-photo, .js .about .name, .js .about .lead, .js .about-history, .js .about .gear,
+  .js .ig-band .eyebrow, .js .ig-band .section-title, .js .ig-band .lead, .js .ig-band .btn-wrap, .js .ig-band .handle,
+  .js .contact .eyebrow, .js .contact .section-title, .js .contact .lead, .js .contact .btn-row,
+  .js .site-footer .fmark, .js .site-footer .flinks, .js .site-footer .copy {
+    opacity: 0;
+    transform: translateY(18px);
+    transition: opacity 0s, transform 0s;
+  }
+  .js .is-visible {
     opacity: 1 !important;
     transform: none !important;
-    transition: none !important;
+    transition: opacity 2.5s ease var(--d, 0.15s), transform 2.7s cubic-bezier(.2, .7, .2, 1) var(--d, 0.15s) !important;
   }
 }
