@@ -122,6 +122,9 @@
   width: min(320px, 100%);
   margin: 32px auto 0;
 }
+/* Instagram + Contact を左右半分ずつ */
+.hero .cta-row { display: flex; gap: 12px; }
+.hero .cta-row .btn { flex: 1; min-width: 0; padding-left: 16px; padding-right: 16px; }
 .hero .hero-visual { margin: clamp(40px, 9vw, 76px) auto 0; max-width: var(--maxw); }
 
 /* ---- concept ---------------------------------------------------------- */
