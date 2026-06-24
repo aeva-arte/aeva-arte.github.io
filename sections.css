@@ -81,7 +81,27 @@
 .hero {
   text-align: center;
   padding: clamp(48px, 11vw, 92px) var(--pad) clamp(36px, 8vw, 64px);
+  position: relative;
+  overflow: hidden;
 }
+/* soft brand-gradient glow behind the hero */
+.hero::before {
+  content: "";
+  position: absolute;
+  left: 50%;
+  top: -6%;
+  width: 135%;
+  height: 76%;
+  transform: translateX(-50%);
+  pointer-events: none;
+  z-index: 0;
+  background:
+    radial-gradient(38% 50% at 30% 32%, rgba(43,58,168,0.42), transparent 70%),
+    radial-gradient(36% 46% at 72% 26%, rgba(236,105,60,0.30), transparent 70%),
+    radial-gradient(34% 44% at 52% 64%, rgba(142,74,134,0.30), transparent 72%);
+  filter: blur(34px);
+}
+.hero > * { position: relative; z-index: 1; }
 .hero .logo-arch {
   height: clamp(54px, 14vw, 76px);
   width: auto;
@@ -257,7 +277,17 @@ img.ph { width: 100%; height: 100%; object-fit: cover; }
 }
 
 /* ---- contact ---------------------------------------------------------- */
-.contact { text-align: center; }
+.contact { text-align: center; position: relative; overflow: hidden; }
+.contact::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background:
+    radial-gradient(55% 95% at 12% 100%, rgba(43,58,168,0.18), transparent 55%),
+    radial-gradient(55% 95% at 90% 0%, rgba(236,105,60,0.13), transparent 55%);
+}
+.contact .inner { position: relative; }
 .contact .lead { margin: 22px auto 0; max-width: 520px; }
 .contact .btn-row {
   display: flex;
