@@ -168,8 +168,19 @@ img.ph { width: 100%; height: 100%; object-fit: cover; }
 /* single-photo category — centered, constrained */
 .solo { max-width: 380px; margin: 0 auto; }
 
-/* ---- about (text only, centered) ------------------------------------- */
+/* ---- about (portrait + centered text) -------------------------------- */
 .about { text-align: center; }
+.about-photo {
+  max-width: 290px;
+  margin: 26px auto 4px;
+}
+.about-photo img {
+  width: 100%;
+  height: auto;
+  border-radius: 16px;
+  border: 1px solid var(--line);
+  display: block;
+}
 .about .name {
   font-family: var(--ff-jp);
   font-weight: 500;
