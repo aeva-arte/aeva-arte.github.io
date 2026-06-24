@@ -137,6 +137,16 @@
   line-height: 1.55;
   margin-top: 18px;
 }
+.concept-tagline .en {
+  display: block;
+  font-family: var(--ff-en);
+  font-weight: 500;
+  font-size: 0.42em;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--fg-3);
+  margin-top: 12px;
+}
 .concept .lead { margin: 24px auto 0; max-width: 600px; font-size: clamp(16px, 2.6vw, 19px); }
 
 /* ---- works ------------------------------------------------------------ */
