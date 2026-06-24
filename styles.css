@@ -142,8 +142,9 @@ a { color: inherit; text-decoration: none; }
 .ph--tall  { aspect-ratio: 4 / 5; }
 .ph--hero  { aspect-ratio: 16 / 10; }
 
-/* ---- scroll reveal (fade-in) ----------------------------------------- */
-/* Only active when JS has added `.js` to <html>. No JS → content shows normally. */
+/* ---- scroll reveal (fade-in, repeats each time a block re-enters view) --- */
+/* Active only when JS adds `.js` to <html>. No JS → content shows normally. */
+/* Slow fade IN (.is-visible), but the reset is instant and happens off-screen. */
 .js .concept .inner,
 .js .works .works-head,
 .js .works .cat,
@@ -153,9 +154,13 @@ a { color: inherit; text-decoration: none; }
 .js .site-footer .inner {
   opacity: 0;
   transform: translateY(22px);
-  transition: opacity 2.5s ease 0.2s, transform 2.7s cubic-bezier(.2, .7, .2, 1) 0.2s;
+  transition: opacity 0s, transform 0s;
 }
-.js .is-visible { opacity: 1 !important; transform: none !important; }
+.js .is-visible {
+  opacity: 1 !important;
+  transform: none !important;
+  transition: opacity 2.5s ease 0.2s, transform 2.7s cubic-bezier(.2, .7, .2, 1) 0.2s !important;
+}
 @media (prefers-reduced-motion: reduce) {
   .js .concept .inner,
   .js .works .works-head,
@@ -164,8 +169,8 @@ a { color: inherit; text-decoration: none; }
   .js .ig-band .inner,
   .js .contact .inner,
   .js .site-footer .inner {
-    opacity: 1;
-    transform: none;
-    transition: none;
+    opacity: 1 !important;
+    transform: none !important;
+    transition: none !important;
   }
 }

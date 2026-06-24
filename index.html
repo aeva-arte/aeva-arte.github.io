@@ -236,36 +236,26 @@
     </div>
   </footer>
 
-  <!-- scroll fade-in: reveal blocks as they enter the viewport.
-       Robust: IntersectionObserver + scroll/load fallback, so content is never left hidden once in view. -->
+  <!-- scroll fade-in (repeatable): fades a block in when it enters view, resets it
+       once it is fully off-screen, so it fades in again next time it re-enters.
+       Reads all rects before writing classes to avoid layout thrashing. -->
   <script>
   (function () {
     var els = document.querySelectorAll('.concept .inner, .works .works-head, .works .cat, .about .inner, .ig-band .inner, .contact .inner, .site-footer .inner');
     if (!els.length) return;
-    function show(el){ el.classList.add('is-visible'); }
-    function showInView(){
-      var remaining = 0;
-      for (var i = 0; i < els.length; i++) {
-        var e = els[i];
-        if (e.classList.contains('is-visible')) continue;
-        var r = e.getBoundingClientRect();
-        if (r.top < window.innerHeight * 0.92 && r.bottom > 0) show(e); else remaining++;
+    function scan() {
+      var h = window.innerHeight || document.documentElement.clientHeight, i, changes = [];
+      for (i = 0; i < els.length; i++) {
+        var el = els[i], r = el.getBoundingClientRect(), vis = el.classList.contains('is-visible');
+        if (vis) { if (r.bottom <= 0 || r.top >= h) changes.push([el, false]); }       // fully off-screen → reset
+        else if (r.top < h * 0.85 && r.bottom > h * 0.15) changes.push([el, true]);      // entered view → fade in
       }
-      if (remaining === 0) {
-        window.removeEventListener('scroll', showInView);
-        window.removeEventListener('resize', showInView);
-      }
+      for (i = 0; i < changes.length; i++) changes[i][0].classList.toggle('is-visible', changes[i][1]);
     }
-    if ('IntersectionObserver' in window) {
-      var io = new IntersectionObserver(function (entries) {
-        entries.forEach(function (en) { if (en.isIntersecting) { show(en.target); io.unobserve(en.target); } });
-      }, { rootMargin: '0px 0px -8% 0px', threshold: 0.12 });
-      els.forEach(function (e) { io.observe(e); });
-    }
-    showInView();
-    window.addEventListener('scroll', showInView, { passive: true });
-    window.addEventListener('resize', showInView, { passive: true });
-    window.addEventListener('load', showInView);
+    scan();
+    window.addEventListener('scroll', scan, { passive: true });
+    window.addEventListener('resize', scan, { passive: true });
+    window.addEventListener('load', scan);
   })();
   </script>
 
