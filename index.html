@@ -244,6 +244,9 @@
   (function () {
     var els = document.querySelectorAll('.concept .eyebrow, .concept .concept-tagline, .concept .lead, .works .works-head, .works .cat-head, .works .grid > *, .about .eyebrow, .about-photo, .about .name, .about .lead, .about-history, .about .gear, .ig-band .eyebrow, .ig-band .section-title, .ig-band .lead, .ig-band .btn-wrap, .ig-band .handle, .contact .eyebrow, .contact .section-title, .contact .lead, .contact .btn-row, .site-footer .fmark, .site-footer .flinks, .site-footer .copy');
     if (!els.length) return;
+    // stable, irregular per-block delay offset so the intervals are uneven (incl. left/right)
+    var JIT = [0, 0.22, 0.08, 0.3, 0.13, 0.26, 0.04, 0.18, 0.31, 0.1, 0.2, 0.06, 0.16, 0.28];
+    for (var k = 0; k < els.length; k++) els[k]._j = JIT[k % JIT.length];
     function scan() {
       var h = window.innerHeight || document.documentElement.clientHeight, i, info = [], show = [];
       for (i = 0; i < els.length; i++) {
@@ -260,7 +263,7 @@
       }
       show.sort(function (a, b) { return a.top - b.top; });
       for (i = 0; i < show.length; i++) {
-        show[i].el.style.setProperty('--d', (0.1 + i * 0.12).toFixed(2) + 's');
+        show[i].el.style.setProperty('--d', (0.06 + i * 0.06 + show[i].el._j).toFixed(2) + 's');
         show[i].el.classList.add('is-visible');
       }
     }
