@@ -7,6 +7,9 @@
   <meta name="description" content="aeva — 写真で日本の風景・旅・動物を記録し、地域と人をつなぐ。Photography by Riki Niitsu." />
   <meta name="theme-color" content="#0a0a0b" />
 
+  <!-- progressive enhancement flag: enables scroll fade-in. Without JS the site shows everything normally. -->
+  <script>document.documentElement.classList.add('js')</script>
+
   <!-- Social share (OGP) + favicon -->
   <meta property="og:type" content="website" />
   <meta property="og:title" content="aeva — 記録し、つなぐ。" />
@@ -232,6 +235,25 @@
       <div class="copy">© 2026 aeva (Riki Niitsu)</div>
     </div>
   </footer>
+
+  <!-- scroll fade-in: reveal blocks as they enter the viewport (safe fallback: show all) -->
+  <script>
+  (function () {
+    var SEL = '.concept .inner, .works .works-head, .works .cat, .about .inner, .ig-band .inner, .contact .inner, .site-footer .inner';
+    var els = document.querySelectorAll(SEL);
+    try {
+      if (!('IntersectionObserver' in window)) throw 0;
+      var io = new IntersectionObserver(function (entries) {
+        entries.forEach(function (en) {
+          if (en.isIntersecting) { en.target.classList.add('is-visible'); io.unobserve(en.target); }
+        });
+      }, { rootMargin: '0px 0px -8% 0px', threshold: 0.12 });
+      els.forEach(function (e) { io.observe(e); });
+    } catch (e) {
+      els.forEach(function (el) { el.classList.add('is-visible'); });
+    }
+  })();
+  </script>
 
 </body>
 </html>

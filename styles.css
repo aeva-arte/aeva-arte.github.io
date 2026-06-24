@@ -141,3 +141,31 @@ a { color: inherit; text-decoration: none; }
 .ph--wide  { aspect-ratio: 3 / 2; }
 .ph--tall  { aspect-ratio: 4 / 5; }
 .ph--hero  { aspect-ratio: 16 / 10; }
+
+/* ---- scroll reveal (fade-in) ----------------------------------------- */
+/* Only active when JS has added `.js` to <html>. No JS → content shows normally. */
+.js .concept .inner,
+.js .works .works-head,
+.js .works .cat,
+.js .about .inner,
+.js .ig-band .inner,
+.js .contact .inner,
+.js .site-footer .inner {
+  opacity: 0;
+  transform: translateY(22px);
+  transition: opacity .7s ease, transform .8s cubic-bezier(.2, .7, .2, 1);
+}
+.js .is-visible { opacity: 1 !important; transform: none !important; }
+@media (prefers-reduced-motion: reduce) {
+  .js .concept .inner,
+  .js .works .works-head,
+  .js .works .cat,
+  .js .about .inner,
+  .js .ig-band .inner,
+  .js .contact .inner,
+  .js .site-footer .inner {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+}
