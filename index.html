@@ -244,9 +244,17 @@
   (function () {
     var els = document.querySelectorAll('.concept .eyebrow, .concept .concept-tagline, .concept .lead, .works .works-head, .works .cat-head, .works .grid > *, .about .eyebrow, .about-photo, .about .name, .about .lead, .about-history, .about .gear, .ig-band .eyebrow, .ig-band .section-title, .ig-band .lead, .ig-band .btn-wrap, .ig-band .handle, .contact .eyebrow, .contact .section-title, .contact .lead, .contact .btn-row, .site-footer .fmark, .site-footer .flinks, .site-footer .copy');
     if (!els.length) return;
-    // stable, irregular per-block delay offset so the intervals are uneven (incl. left/right)
-    var JIT = [0, 0.52, 0.14, 0.78, 0.3, 0.62, 0.06, 0.44, 0.85, 0.22, 0.68, 0.1, 0.38, 0.58];
-    for (var k = 0; k < els.length; k++) els[k]._j = JIT[k % JIT.length];
+    // Stable, irregular per-ROW delay so rows scatter; photos sharing a .grid share the
+    // row delay (_j) and get only a small per-column offset (_c) so left/right start close.
+    var ROWJIT = [0, 0.52, 0.14, 0.78, 0.3, 0.62, 0.06, 0.44, 0.85, 0.22, 0.68, 0.1, 0.38, 0.58];
+    var gi = 0;
+    for (var k = 0; k < els.length; k++) {
+      var grid = els[k].closest && els[k].closest('.grid');
+      var rowKey = grid || els[k];
+      if (rowKey._gj === undefined) { rowKey._gj = ROWJIT[gi % ROWJIT.length]; gi++; }
+      els[k]._j = rowKey._gj;
+      els[k]._c = grid ? Array.prototype.indexOf.call(grid.children, els[k]) : 0;
+    }
     function scan() {
       var h = window.innerHeight || document.documentElement.clientHeight, i, info = [], show = [];
       for (i = 0; i < els.length; i++) {
@@ -261,10 +269,10 @@
           show.push(d);
         }
       }
-      show.sort(function (a, b) { return a.top - b.top; });
       for (i = 0; i < show.length; i++) {
-        show[i].el.style.setProperty('--d', (0.04 + i * 0.04 + show[i].el._j).toFixed(2) + 's');
-        show[i].el.classList.add('is-visible');
+        var el = show[i].el;
+        el.style.setProperty('--d', (0.06 + el._j + el._c * 0.08).toFixed(2) + 's');
+        el.classList.add('is-visible');
       }
     }
     scan();
