@@ -239,6 +239,41 @@ img.ph { width: 100%; height: 100%; object-fit: cover; }
   margin-left: 12px;
 }
 .about .lead { margin: 22px auto 0; max-width: 560px; }
+/* 経歴 / Background */
+.about-history { max-width: 540px; margin: 34px auto 0; text-align: left; }
+.about-history .hist-label {
+  display: block;
+  text-align: center;
+  font-family: var(--ff-en);
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: var(--fg-3);
+  margin-bottom: 22px;
+}
+.hist-list { list-style: none; display: flex; flex-direction: column; gap: 15px; }
+.hist-list li {
+  display: grid;
+  grid-template-columns: 48px 1fr;
+  gap: 16px;
+  align-items: baseline;
+  font-size: 14px;
+  line-height: 1.75;
+  color: var(--fg-2);
+}
+.hist-list .yr {
+  font-family: var(--ff-en);
+  font-weight: 700;
+  font-size: 14px;
+  letter-spacing: 0.02em;
+  color: transparent;
+  background: var(--arch);
+  -webkit-background-clip: text;
+  background-clip: text;
+}
+.hist-list .desc a { color: var(--fg); border-bottom: 1px solid var(--line); }
+.hist-list .desc a:hover { border-color: var(--fg); }
 .about .gear {
   display: inline-flex;
   align-items: center;
