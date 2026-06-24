@@ -1,282 +1,215 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="ja">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>aeva — 記録し、つなぐ。 / Riki Niitsu</title>
-<meta name="description" content="aeva — 記録し、つなぐ。写真で日本の風景・旅・動物を記録し、地域と人をつなぐ。Travel, wildlife and quiet scenes from Japan.">
-<link rel="icon" type="image/png" href="images/favicon.png">
-<!-- OGP -->
-<meta property="og:title" content="aeva — 記録し、つなぐ。">
-<meta property="og:description" content="写真で日本の風景・旅・動物を記録し、地域と人をつなぐ。Travel, wildlife and quiet scenes from Japan.">
-<meta property="og:url" content="https://aeva-arte.github.io">
-<meta property="og:type" content="website">
-<meta property="og:locale" content="ja_JP">
-<meta property="og:site_name" content="aeva">
-<meta property="og:image" content="https://aeva-arte.github.io/images/ogp.jpg">
-<meta name="twitter:card" content="summary_large_image">
-<style>
-  :root{
-    --bg:#0e0e10; --bg2:#141417; --ink:#f3f1ee; --sub:#a8a6a2; --faint:#6c6a68;
-    --line:#2a2a2e; --card:#16161a;
-    --grad:linear-gradient(90deg,#4b4fe0,#e8623c);
-    --maxw:1080px;
-  }
-  *{box-sizing:border-box;margin:0;padding:0}
-  html{scroll-behavior:smooth}
-  body{
-    font:16px/1.7 -apple-system,"Hiragino Kaku Gothic ProN","Hiragino Sans",sans-serif;
-    color:var(--ink);background:var(--bg);-webkit-font-smoothing:antialiased;
-  }
-  img{display:block;width:100%;height:100%;object-fit:cover}
-  a{color:inherit;text-decoration:none}
-  .wrap{max-width:var(--maxw);margin:0 auto;padding:0 22px}
-  .en{letter-spacing:.18em;text-transform:uppercase}
-  section{padding:96px 0}
-  .eyebrow{font-size:12px;letter-spacing:.22em;text-transform:uppercase;color:var(--faint);margin-bottom:18px}
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>aeva — 記録し、つなぐ。 / Riki Niitsu</title>
+  <meta name="description" content="aeva — 写真で日本の風景・旅・動物を記録し、地域と人をつなぐ。Photography by Riki Niitsu." />
+  <meta name="theme-color" content="#0a0a0b" />
 
-  /* nav */
-  header{position:sticky;top:0;z-index:50;background:rgba(14,14,16,.72);backdrop-filter:blur(12px);border-bottom:1px solid var(--line)}
-  .nav{display:flex;align-items:center;justify-content:space-between;height:60px}
-  .brand{display:flex;align-items:center;gap:10px;font-size:20px;font-weight:700;letter-spacing:.02em}
-  .brand svg{width:30px;height:20px}
-  .nav a.ig{font-size:13px;letter-spacing:.08em;color:var(--sub)}
-  .nav a.ig:hover{color:var(--ink)}
+  <!-- Social share (OGP) + favicon -->
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="aeva — 記録し、つなぐ。" />
+  <meta property="og:description" content="写真で日本の風景・旅・動物を記録し、地域と人をつなぐ。Photography by Riki Niitsu." />
+  <meta property="og:url" content="https://aeva-arte.github.io" />
+  <meta property="og:image" content="https://aeva-arte.github.io/images/ogp.jpg" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <link rel="icon" type="image/png" href="images/favicon.png" />
 
-  /* hero */
-  .hero{text-align:center;padding:84px 0 64px;background:radial-gradient(58% 42% at 15% 4%,rgba(75,79,224,.20),transparent 62%),radial-gradient(54% 40% at 88% 2%,rgba(232,98,60,.17),transparent 62%)}
-  .hero .logo{width:88px;height:56px;margin:0 auto 26px}
-  .hero h1{font-size:clamp(54px,16vw,104px);line-height:.95;font-weight:800;letter-spacing:.01em}
-  .hero .tag{font-size:clamp(20px,5.4vw,30px);font-weight:700;margin-top:22px}
-  .hero .tag-en{font-size:12px;letter-spacing:.24em;text-transform:uppercase;color:var(--faint);margin-top:10px}
-  .hero .lead{color:var(--sub);max-width:520px;margin:24px auto 0;font-size:15px}
-  .hero .lead .jp{display:block}
-  .hero .lead .en{display:block;margin-top:8px;color:var(--faint);font-size:13.5px;letter-spacing:.02em;text-transform:none}
-  .cta{display:flex;flex-wrap:wrap;gap:12px;justify-content:center;margin-top:34px}
-  .btn{display:inline-flex;align-items:center;gap:9px;padding:14px 26px;border-radius:999px;font-size:15px;font-weight:600;border:1px solid transparent;transition:transform .12s ease,opacity .12s ease}
-  .btn:hover{transform:translateY(-2px)}
-  .btn-primary{background:var(--ink);color:#111}
-  .btn-ig{background:var(--grad);color:#fff}
-  .btn-ghost{border-color:#3a3a3f;color:var(--ink)}
-  .hero-visual{max-width:480px;margin:54px auto 0;padding:0 22px}
-  .hero-visual .frame{aspect-ratio:3/4;border-radius:16px;overflow:hidden;border:1px solid var(--line)}
+  <!-- Fonts (optional; remove these two lines to go fully offline) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Zen+Kaku+Gothic+New:wght@400;500;700&display=swap" rel="stylesheet" />
 
-  /* concept */
-  .concept{background:var(--bg2);border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
-  .concept p.jp{font-size:clamp(18px,4.4vw,23px);line-height:1.95;font-weight:500;max-width:760px}
-  .concept p.en{color:var(--sub);margin-top:20px;max-width:680px;font-size:14.5px;line-height:1.9}
-
-  /* works */
-  .cat{margin-top:60px}
-  .cat:first-of-type{margin-top:36px}
-  .cat-head{display:flex;align-items:baseline;gap:16px;border-bottom:1px solid var(--line);padding-bottom:14px;margin-bottom:22px}
-  .cat-head .no{font-size:13px;color:#e8623c;font-weight:700;letter-spacing:.1em}
-  .cat-head h3{font-size:22px;font-weight:700;letter-spacing:.04em}
-  .cat-head .ja{margin-left:auto;color:var(--sub);font-size:14px}
-  .grid{display:grid;grid-template-columns:repeat(2,1fr);gap:14px}
-  .solo{max-width:420px;margin:0 auto}
-  .stack{display:flex;flex-direction:column;gap:14px}
-  .stack .shot-img{width:100%;height:auto;display:block;border-radius:12px;border:1px solid var(--line);cursor:pointer;transition:opacity .3s ease}
-  .stack .shot-img:hover{opacity:.92}
-  .shot{aspect-ratio:3/4;border-radius:12px;overflow:hidden;border:1px solid var(--line);cursor:pointer;background:var(--card)}
-  .shot.tall{aspect-ratio:3/4}
-  .shot img{transition:transform .5s ease,opacity .3s ease}
-  .shot:hover img{transform:scale(1.04)}
-
-  /* what aeva does */
-  .does{background:var(--bg2);border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
-  .pillars{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-top:30px}
-  .pillar{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:30px 26px}
-  .pillar h4{font-size:19px;font-weight:700;margin-bottom:6px}
-  .pillar h4 span{color:#e8623c;font-size:12px;letter-spacing:.14em;margin-left:8px;text-transform:uppercase}
-  .pillar p{color:var(--sub);font-size:14.5px;margin-top:10px}
-  .does .en{color:var(--faint);font-size:13.5px;margin-top:24px}
-
-  /* about */
-  .about-grid{display:grid;grid-template-columns:0.8fr 1.2fr;gap:40px;align-items:center}
-  .about-solo{max-width:600px;margin:0 auto;text-align:center}
-  .about-photo{aspect-ratio:3/4;border-radius:14px;overflow:hidden;border:1px solid var(--line)}
-  .about h2{font-size:26px;font-weight:700}
-  .about .role{color:var(--faint);font-size:13px;letter-spacing:.16em;text-transform:uppercase;margin-top:6px}
-  .about p.jp{color:var(--ink);margin-top:22px;font-size:15.5px;line-height:1.95}
-  .about p.en{color:var(--sub);margin-top:16px;font-size:14px;line-height:1.85}
-  .about .gear{display:inline-block;margin-top:22px;padding:8px 16px;border:1px solid var(--line);border-radius:999px;font-size:13px;color:var(--sub)}
-
-  /* instagram cta */
-  .ig-cta{text-align:center;background:radial-gradient(80% 120% at 30% 0%,rgba(75,79,224,.16),transparent 55%),radial-gradient(80% 120% at 80% 100%,rgba(232,98,60,.13),transparent 55%),var(--bg)}
-  .ig-cta h2{font-size:clamp(24px,6vw,34px);font-weight:700}
-  .ig-cta p{color:var(--sub);margin-top:16px;font-size:15px}
-  .ig-cta p .en{display:block;color:var(--faint);font-size:13px;margin-top:6px}
-  .ig-cta .btn-ig{margin-top:30px;font-size:16px;padding:16px 34px}
-
-  /* contact */
-  .contact{text-align:center;border-top:1px solid var(--line)}
-  .contact p{color:var(--sub);max-width:540px;margin:14px auto 0;font-size:15px}
-  .contact p .en{display:block;color:var(--faint);font-size:13px;margin-top:6px}
-  .contact .cta{margin-top:30px}
-
-  /* footer */
-  footer{border-top:1px solid var(--line);padding:46px 0;text-align:center;color:var(--faint)}
-  footer .fbrand{font-size:18px;font-weight:700;color:var(--ink);letter-spacing:.02em}
-  footer .flinks{display:flex;gap:22px;justify-content:center;margin:18px 0;font-size:14px}
-  footer .flinks a{color:var(--sub)}
-  footer .flinks a:hover{color:var(--ink)}
-  footer small{font-size:12px;letter-spacing:.04em}
-
-  /* lightbox */
-  .lb{position:fixed;inset:0;background:rgba(8,8,10,.94);display:none;align-items:center;justify-content:center;z-index:100;padding:20px;cursor:zoom-out}
-  .lb.open{display:flex}
-  .lb img{max-width:100%;max-height:90vh;width:auto;height:auto;border-radius:8px;object-fit:contain}
-
-  @media(max-width:680px){
-    section{padding:72px 0}
-    .pillars{grid-template-columns:1fr}
-    .about-grid{grid-template-columns:1fr;gap:24px}
-    .about-photo{max-width:260px}
-    .grid{gap:10px}
-  }
-</style>
+  <!-- Styles (plain, editable CSS) -->
+  <link rel="stylesheet" href="styles.css" />
+  <link rel="stylesheet" href="sections.css" />
 </head>
+
 <body>
 
-<header>
-  <div class="wrap nav">
+  <!-- ===================================================================
+       HEADER
+       Logo: replace images/logo.png with your own file (kept external).
+       =================================================================== -->
+  <header class="site-header">
     <a class="brand" href="#top">
-      <svg viewBox="0 0 100 60" aria-hidden="true"><defs><linearGradient id="g" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#4b4fe0"/><stop offset="1" stop-color="#e8623c"/></linearGradient></defs><path d="M14 54 A36 36 0 0 1 86 54" fill="none" stroke="url(#g)" stroke-width="16" stroke-linecap="round"/></svg>
-      aeva
+      <img class="logo" src="images/logo.png" alt="aeva ロゴ" />
+      <span>aeva</span>
     </a>
-    <a class="ig" href="https://www.instagram.com/aeva_arte/" target="_blank" rel="noopener">Instagram</a>
-  </div>
-</header>
+    <nav>
+      <a class="hide-sm" href="#works">Works</a>
+      <a class="hide-sm" href="#about">About</a>
+      <a class="hide-sm" href="#contact">Contact</a>
+      <a class="is-ig" href="https://www.instagram.com/aeva_arte/" target="_blank" rel="noopener">Instagram</a>
+    </nav>
+  </header>
 
-<main id="top">
+  <main id="top">
 
-  <!-- HERO -->
-  <section class="hero">
-    <div class="wrap">
-      <div class="logo"><svg viewBox="0 0 100 60" aria-hidden="true"><path d="M14 54 A36 36 0 0 1 86 54" fill="none" stroke="url(#g)" stroke-width="16" stroke-linecap="round"/></svg></div>
-      <h1>aeva</h1>
-      <div class="tag">記録し、つなぐ。</div>
-      <div class="tag-en">Record and connect</div>
-      <p class="lead">
-        <span class="jp">写真で日本の風景・旅・動物を記録し、地域と人をつなぐ。</span>
+    <!-- =================================================================
+         ① HERO
+         ================================================================= -->
+    <section class="hero">
+      <!-- Logo (external reference: images/logo.png) -->
+      <img class="logo-arch" src="images/logo.png" alt="aeva ロゴ — 青からオレンジのアーチ" />
+
+      <h1 class="wordmark">aeva</h1>
+
+      <p class="tagline">記録し、つなぐ。<span class="en">Record and connect</span></p>
+
+      <p class="lead subcopy">
+        写真で日本の風景・旅・動物を記録し、地域と人をつなぐ。
         <span class="en">Capturing Japan — connecting places and people through photography.</span>
       </p>
-      <div class="cta">
-        <a class="btn btn-primary" href="#works">View Works</a>
-        <a class="btn btn-ig" href="https://www.instagram.com/aeva_arte/" target="_blank" rel="noopener">
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="#fff" stroke="none"/></svg>
-          Instagram
-        </a>
-        <a class="btn btn-ghost" href="#contact">Contact</a>
+
+      <!-- CTAs — vertical, equal width -->
+      <div class="cta-stack">
+        <a class="btn btn--solid btn--block" href="#works">View Works</a>
+        <a class="btn btn--ig btn--block" href="https://www.instagram.com/aeva_arte/" target="_blank" rel="noopener">Instagram</a>
+        <a class="btn btn--block" href="#contact">Contact</a>
       </div>
-    </div>
-    <div class="hero-visual"><div class="frame"><img src="images/hero.jpg" alt="aeva main visual" loading="eager"></div></div>
-  </section>
 
-  <!-- CONCEPT -->
-  <section class="concept">
-    <div class="wrap">
-      <div class="eyebrow">Concept</div>
-      <p class="jp">日本の風景・旅・動物を、静かに記録する。観光地の華やかさよりも、その場に流れる空気や余白に惹かれて。撮りためた景色を、国内外へ届けています。</p>
-      <p class="en">Quietly recording the landscapes, journeys and wildlife of Japan — drawn to the air and stillness of a place rather than its spectacle, and sharing it with viewers at home and abroad.</p>
-    </div>
-  </section>
+      <!-- Main visual -->
+      <div class="hero-visual">
+        <img class="ph ph--hero" src="images/hero.jpg" alt="aeva メインビジュアル — 夜の都市" />
+      </div>
+    </section>
 
-  <!-- WORKS -->
-  <section id="works">
-    <div class="wrap">
-      <div class="eyebrow">Works</div>
+    <!-- =================================================================
+         ② CONCEPT
+         ================================================================= -->
+    <section class="section section--line concept" id="concept">
+      <div class="inner">
+        <span class="eyebrow">Concept</span>
+        <p class="lead">
+          日本の風景・旅・動物を、静かに記録する。観光地の華やかさよりも、その場に流れる空気や余白に惹かれて。撮りためた景色を、国内外へ届けています。
+          <span class="en">Quietly recording the landscapes, journeys and wildlife of Japan — drawn to the air and stillness of a place rather than its spectacle.</span>
+        </p>
+      </div>
+    </section>
 
-      <div class="cat">
-        <div class="cat-head"><span class="no">01</span><h3>Travel</h3><span class="ja">旅</span></div>
-        <div class="stack">
-          <img class="shot-img" src="images/travel-1.jpg" alt="Travel 1" loading="lazy">
-          <img class="shot-img" src="images/travel-2.jpg" alt="Travel 2" loading="lazy">
-          <img class="shot-img" src="images/travel-3.jpg" alt="Travel 3" loading="lazy">
+    <!-- =================================================================
+         ③ WORKS — placeholder grids per category
+         Replace each .ph with <img src="images/works/xxxx.jpg" alt="...">
+         ================================================================= -->
+    <section class="section section--line works" id="works">
+      <div class="inner">
+        <div class="works-head">
+          <span class="eyebrow">Works</span>
+          <h2 class="section-title">作品<span class="jp">Travel · Wildlife · Landscape · City</span></h2>
+        </div>
+
+        <!-- 01 Travel -->
+        <div class="cat">
+          <div class="cat-head"><span class="num">01</span><span class="en">Travel</span><span class="jp">旅</span></div>
+          <div class="grid grid--2">
+            <img class="ph ph--wide" src="images/works/travel-01.jpg" alt="Travel — 万博の夕景" loading="lazy" />
+            <img class="ph ph--wide" src="images/works/travel-02.jpg" alt="Travel — 万博の夜景" loading="lazy" />
+          </div>
+        </div>
+
+        <!-- 02 Wildlife -->
+        <div class="cat">
+          <div class="cat-head"><span class="num">02</span><span class="en">Wildlife</span><span class="jp">動物・野鳥</span></div>
+          <div class="grid grid--2">
+            <img class="ph ph--tall" src="images/works/wildlife-01.jpg" alt="Wildlife — 雪のキツネ" loading="lazy" />
+            <img class="ph ph--tall" src="images/works/wildlife-02.jpg" alt="Wildlife — キツネのポートレート" loading="lazy" />
+          </div>
+        </div>
+
+        <!-- 03 Landscape -->
+        <div class="cat">
+          <div class="cat-head"><span class="num">03</span><span class="en">Landscape</span><span class="jp">風景</span></div>
+          <div class="solo">
+            <img class="ph ph--tall" src="images/works/landscape-01.jpg" alt="Landscape — ネモフィラ" loading="lazy" />
+          </div>
+        </div>
+
+        <!-- 04 City · Street -->
+        <div class="cat">
+          <div class="cat-head"><span class="num">04</span><span class="en">City · Street</span><span class="jp">都市スナップ</span></div>
+          <div class="solo">
+            <img class="ph ph--tall" src="images/works/city-01.jpg" alt="City — 工場と空" loading="lazy" />
+          </div>
         </div>
       </div>
+    </section>
 
-      <div class="cat">
-        <div class="cat-head"><span class="no">02</span><h3>Wildlife</h3><span class="ja">動物・野鳥</span></div>
-        <div class="grid">
-          <div class="shot"><img src="images/wildlife-1.jpg" alt="Wildlife 1" loading="lazy"></div>
-          <div class="shot"><img src="images/wildlife-2.jpg" alt="Wildlife 2" loading="lazy"></div>
+    <!-- =================================================================
+         ④ ABOUT — text only, centered
+         ================================================================= -->
+    <section class="section section--line about" id="about">
+      <div class="inner">
+        <span class="eyebrow">About</span>
+        <p class="name">新津 力<span class="en">Riki Niitsu</span></p>
+        <p class="lead">
+          旅・動物・野鳥・風景・都市スナップ、そして日本の地域や観光地の空気感を撮影しています。Instagram を主な発信拠点に、日本国内外へ写真を届けています。
+        </p>
+        <span class="gear">
+          <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/><circle cx="12" cy="13" r="4"/></svg>
+          <span><b>Nikon Z9</b> · Z-mount lenses</span>
+        </span>
+      </div>
+    </section>
+
+    <!-- =================================================================
+         ⑤ INSTAGRAM CTA
+         ================================================================= -->
+    <section class="section section--line ig-band" id="instagram">
+      <div class="inner">
+        <span class="eyebrow">Instagram</span>
+        <h2 class="section-title">最新作は、Instagramで。</h2>
+        <p class="lead">新着の作品を不定期に更新中。<span class="en">New work, posted as I travel.</span></p>
+        <div class="btn-wrap">
+          <a class="btn btn--ig btn--lg" href="https://www.instagram.com/aeva_arte/" target="_blank" rel="noopener">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5.5"/><circle cx="12" cy="12" r="4.2"/><circle cx="17.4" cy="6.6" r="1.1" fill="currentColor" stroke="none"/></svg>
+            Follow @aeva_arte
+          </a>
+        </div>
+        <p class="handle">@aeva_arte</p>
+      </div>
+    </section>
+
+    <!-- =================================================================
+         ⑥ CONTACT
+         ================================================================= -->
+    <section class="section section--line contact" id="contact">
+      <div class="inner">
+        <span class="eyebrow">Contact</span>
+        <h2 class="section-title">お気軽にどうぞ。</h2>
+        <p class="lead">
+          撮影・展示・写真利用・地域や観光に関わるご相談など、お気軽にどうぞ。
+          <span class="en">Open to photo work, exhibitions, and collaborations.</span>
+        </p>
+        <div class="btn-row">
+          <a class="btn btn--solid btn--lg" href="mailto:192418ringowatch@gmail.com">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2.5" y="4.5" width="19" height="15" rx="2.5"/><path d="M3 6.5l9 6 9-6"/></svg>
+            Email
+          </a>
+          <a class="btn btn--lg" href="https://www.instagram.com/aeva_arte/" target="_blank" rel="noopener">Instagram DM</a>
         </div>
       </div>
+    </section>
 
-      <div class="cat">
-        <div class="cat-head"><span class="no">03</span><h3>Landscape</h3><span class="ja">風景</span></div>
-        <div class="solo"><div class="shot"><img src="images/landscape-1.jpg" alt="Landscape" loading="lazy"></div></div>
+  </main>
+
+  <!-- ===================================================================
+       ⑦ FOOTER
+       =================================================================== -->
+  <footer class="site-footer">
+    <div class="inner">
+      <div class="fmark">
+        <img class="logo" src="images/logo.png" alt="aeva ロゴ" />
+        <span>aeva</span>
       </div>
-
-      <div class="cat">
-        <div class="cat-head"><span class="no">04</span><h3>City · Street</h3><span class="ja">都市スナップ</span></div>
-        <div class="solo"><div class="shot"><img src="images/city-1.jpg" alt="City" loading="lazy"></div></div>
+      <div class="flinks">
+        <a href="https://www.instagram.com/aeva_arte/" target="_blank" rel="noopener">Instagram</a>
+        <a href="mailto:192418ringowatch@gmail.com">Contact</a>
       </div>
+      <div class="copy">© 2026 aeva (Riki Niitsu)</div>
     </div>
-  </section>
+  </footer>
 
-  <!-- ABOUT -->
-  <section class="about">
-    <div class="wrap about-solo">
-      <div>
-        <div class="eyebrow">About</div>
-        <h2>新津 力</h2>
-        <div class="role">Riki Niitsu — behind aeva</div>
-        <p class="jp">旅・動物・野鳥・風景・都市スナップ、そして日本の地域や観光地の空気感を撮影しています。Instagram を主な発信拠点に、日本国内外へ写真を届けています。</p>
-        <p class="en">Shooting travel, wildlife, landscapes and city scenes across Japan, and sharing mainly on Instagram for viewers at home and abroad.</p>
-        <span class="gear">📷 Nikon Z9 / Z-mount lenses</span>
-      </div>
-    </div>
-  </section>
-
-  <!-- INSTAGRAM CTA -->
-  <section class="ig-cta">
-    <div class="wrap">
-      <div class="eyebrow">Instagram</div>
-      <h2>最新作は、Instagramで。</h2>
-      <p>旅と自然の写真を不定期に更新中。<span class="en">New work, posted as I travel.</span></p>
-      <a class="btn btn-ig" href="https://www.instagram.com/aeva_arte/" target="_blank" rel="noopener">
-        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="#fff" stroke="none"/></svg>
-        Follow @aeva_arte
-      </a>
-    </div>
-  </section>
-
-  <!-- CONTACT -->
-  <section class="contact" id="contact">
-    <div class="wrap">
-      <div class="eyebrow">Contact</div>
-      <p>撮影・展示・写真利用・地域や観光に関わるご相談など、お気軽にどうぞ。<span class="en">Open to photo work, exhibitions, and collaborations.</span></p>
-      <div class="cta">
-        <a class="btn btn-ghost" href="mailto:192418ringowatch@gmail.com">Email</a>
-        <a class="btn btn-ig" href="https://www.instagram.com/aeva_arte/" target="_blank" rel="noopener">Instagram DM</a>
-      </div>
-    </div>
-  </section>
-</main>
-
-<footer>
-  <div class="wrap">
-    <div class="fbrand">aeva</div>
-    <div class="flinks">
-      <a href="https://www.instagram.com/aeva_arte/" target="_blank" rel="noopener">Instagram</a>
-      <a href="mailto:192418ringowatch@gmail.com">Contact</a>
-    </div>
-    <small>© 2026 aeva (Riki Niitsu)</small>
-  </div>
-</footer>
-
-<div class="lb" id="lb"><img src="" alt=""></div>
-<script>
-  // lightbox
-  var lb=document.getElementById('lb'), lbimg=lb.querySelector('img');
-  document.querySelectorAll('.shot img, .stack .shot-img').forEach(function(im){
-    im.addEventListener('click',function(){lbimg.src=im.src;lbimg.alt=im.alt;lb.classList.add('open');});
-  });
-  lb.addEventListener('click',function(){lb.classList.remove('open');lbimg.src='';});
-  document.addEventListener('keydown',function(e){if(e.key==='Escape'){lb.classList.remove('open');lbimg.src='';}});
-</script>
 </body>
 </html>

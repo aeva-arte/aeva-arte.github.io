@@ -1,0 +1,131 @@
+/* =========================================================================
+   aeva — landing page styles
+   Pure CSS, no JavaScript. Dark theme, mobile-first, photo-led.
+   Edit freely — values are grouped and commented.
+   ========================================================================= */
+
+/* ---- design tokens ---------------------------------------------------- */
+:root {
+  --bg:        #0a0a0b;   /* page background (near-black) */
+  --bg-2:      #121214;   /* elevated panels / placeholder frames */
+  --bg-3:      #1b1b1e;   /* placeholder fill */
+  --fg:        #f5f5f7;   /* primary text */
+  --fg-2:      #a8a8ad;   /* secondary text */
+  --fg-3:      #6e6e73;   /* muted / captions */
+  --line:      rgba(255,255,255,0.12);  /* hairline borders */
+  --line-2:    rgba(255,255,255,0.06);
+
+  /* brand accent — the aeva arch gradient (blue → plum → orange) */
+  --blue:   #2B3AA8;
+  --plum:   #8E4A86;
+  --orange: #EC693C;
+  --arch:   linear-gradient(90deg, #2B3AA8 0%, #8E4A86 52%, #EC693C 100%);
+  --arch-d: linear-gradient(105deg, #2B3AA8 0%, #3A3E9E 28%, #8E4A86 52%, #D85A52 76%, #EC693C 100%);
+
+  --ff-en: "Inter", system-ui, sans-serif;
+  --ff-jp: "Zen Kaku Gothic New", system-ui, sans-serif;
+
+  --maxw: 1040px;
+  --pad:  clamp(20px, 6vw, 56px);
+}
+
+/* ---- reset ------------------------------------------------------------ */
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
+body {
+  background: var(--bg);
+  color: var(--fg);
+  font-family: var(--ff-jp);
+  line-height: 1.75;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+img { display: block; max-width: 100%; }
+a { color: inherit; text-decoration: none; }
+
+/* ---- layout helpers --------------------------------------------------- */
+.section { padding: clamp(60px, 13vw, 124px) var(--pad); }
+.section--line { border-top: 1px solid var(--line-2); }
+.inner { max-width: var(--maxw); margin: 0 auto; }
+.center { text-align: center; }
+
+/* ---- shared type ------------------------------------------------------ */
+.eyebrow {
+  font-family: var(--ff-en);
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.34em;
+  text-transform: uppercase;
+  color: var(--fg-3);
+  display: inline-flex;
+  align-items: center;
+  gap: 13px;
+}
+.eyebrow::before {
+  content: "";
+  width: 24px; height: 3px; border-radius: 99px;
+  background: var(--arch);
+}
+.section-title {
+  font-family: var(--ff-en);
+  font-weight: 600;
+  font-size: clamp(28px, 6vw, 46px);
+  letter-spacing: -0.01em;
+  line-height: 1.06;
+  margin-top: 18px;
+}
+.section-title .jp {
+  display: block;
+  font-family: var(--ff-jp);
+  font-weight: 500;
+  font-size: clamp(18px, 3.2vw, 24px);
+  letter-spacing: 0.04em;
+  color: var(--fg-2);
+  margin-top: 12px;
+}
+.lead {
+  font-size: clamp(15px, 2.3vw, 17px);
+  color: var(--fg-2);
+  line-height: 2;
+  text-wrap: pretty;
+}
+.lead .en {
+  display: block;
+  margin-top: 14px;
+  font-family: var(--ff-en);
+  font-size: 0.9em;
+  color: var(--fg-3);
+  line-height: 1.7;
+}
+
+/* ---- gray image placeholders ----------------------------------------- */
+/* Each .ph marks where a real photo goes. Swap it for an <img> when ready:
+   <img src="images/hero.jpg" alt="..."> — the frame styling can be reused. */
+.ph {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background:
+    repeating-linear-gradient(45deg, var(--bg-3) 0 14px, var(--bg-2) 14px 28px);
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  overflow: hidden;
+  color: var(--fg-3);
+}
+.ph__label {
+  font-family: var(--ff-en);
+  font-size: 12px;
+  letter-spacing: 0.03em;
+  color: var(--fg-2);
+  background: rgba(0,0,0,0.5);
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  padding: 6px 13px;
+  backdrop-filter: blur(3px);
+}
+.ph__label b { color: var(--fg); font-weight: 600; }
+/* aspect ratios */
+.ph--wide  { aspect-ratio: 3 / 2; }
+.ph--tall  { aspect-ratio: 4 / 5; }
+.ph--hero  { aspect-ratio: 16 / 10; }

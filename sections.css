@@ -1,0 +1,277 @@
+/* =========================================================================
+   aeva — section & component styles  (load after styles.css)
+   ========================================================================= */
+
+/* ---- sticky header ---------------------------------------------------- */
+.site-header {
+  position: sticky;
+  top: 0;
+  z-index: 20;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 13px var(--pad);
+  background: rgba(10,10,11,0.72);
+  backdrop-filter: saturate(1.3) blur(14px);
+  -webkit-backdrop-filter: saturate(1.3) blur(14px);
+  border-bottom: 1px solid var(--line-2);
+}
+.site-header .brand {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  font-family: var(--ff-en);
+  font-weight: 600;
+  font-size: 18px;
+  letter-spacing: 0.01em;
+}
+.site-header .brand .logo {
+  height: 22px; width: auto;
+  object-fit: contain;
+}
+.site-header nav {
+  display: flex;
+  align-items: center;
+  gap: clamp(14px, 3vw, 28px);
+}
+.site-header nav a {
+  font-family: var(--ff-en);
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: 0.03em;
+  color: var(--fg-2);
+}
+.site-header nav a.is-ig { color: var(--fg); font-weight: 600; }
+.site-header nav .hide-sm { display: none; }
+@media (min-width: 620px) { .site-header nav .hide-sm { display: inline; } }
+
+/* ---- buttons ---------------------------------------------------------- */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 9px;
+  font-family: var(--ff-en);
+  font-size: 15px;
+  font-weight: 600;
+  letter-spacing: 0.01em;
+  padding: 15px 26px;
+  border-radius: 999px;
+  border: 1px solid var(--line);
+  color: var(--fg);
+  background: transparent;
+  transition: border-color .2s ease, background .2s ease, transform .15s ease;
+}
+.btn svg { width: 18px; height: 18px; }
+.btn:hover { border-color: rgba(255,255,255,0.4); }
+.btn:active { transform: scale(0.98); }
+.btn--solid { background: var(--fg); color: var(--bg); border-color: var(--fg); }
+.btn--solid:hover { background: #fff; border-color: #fff; }
+/* Instagram button — clean horizontal blue→plum→orange, edge to edge */
+.btn--ig {
+  border: none;
+  color: #fff;
+  background: var(--arch);
+}
+.btn--ig:hover { filter: brightness(1.07); border: none; }
+.btn--lg { padding: 17px 30px; font-size: 16px; }
+.btn--block { display: flex; width: 100%; }
+
+/* ---- hero ------------------------------------------------------------- */
+.hero {
+  text-align: center;
+  padding: clamp(48px, 11vw, 92px) var(--pad) clamp(36px, 8vw, 64px);
+}
+.hero .logo-arch {
+  height: clamp(54px, 14vw, 76px);
+  width: auto;
+  object-fit: contain;
+  margin: 0 auto;
+}
+.hero .wordmark {
+  font-family: var(--ff-en);
+  font-weight: 600;
+  font-size: clamp(56px, 17vw, 116px);
+  line-height: 0.92;
+  letter-spacing: -0.03em;
+  margin-top: 16px;
+}
+.hero .tagline {
+  font-family: var(--ff-jp);
+  font-weight: 500;
+  font-size: clamp(21px, 4.6vw, 30px);
+  letter-spacing: 0.06em;
+  margin-top: 22px;
+}
+.hero .tagline .en {
+  display: block;
+  font-family: var(--ff-en);
+  font-weight: 500;
+  font-size: 0.46em;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--fg-3);
+  margin-top: 12px;
+}
+.hero .subcopy { margin: 22px auto 0; max-width: 540px; }
+/* hero CTAs — vertical, equal width */
+.hero .cta-stack {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  width: min(320px, 100%);
+  margin: 32px auto 0;
+}
+.hero .hero-visual { margin: clamp(40px, 9vw, 76px) auto 0; max-width: var(--maxw); }
+
+/* ---- concept ---------------------------------------------------------- */
+.concept { text-align: center; }
+.concept .lead { margin: 24px auto 0; max-width: 600px; font-size: clamp(16px, 2.6vw, 19px); }
+
+/* ---- works ------------------------------------------------------------ */
+.works .works-head { margin-bottom: clamp(30px, 6vw, 52px); }
+.cat { margin-top: clamp(38px, 7vw, 60px); }
+.cat:first-of-type { margin-top: clamp(26px, 5vw, 40px); }
+.cat-head {
+  display: flex;
+  align-items: baseline;
+  gap: 13px;
+  padding-bottom: 13px;
+  margin-bottom: 18px;
+  border-bottom: 1px solid var(--line);
+}
+.cat-head .num {
+  font-family: var(--ff-en);
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  color: transparent;
+  background: var(--arch);
+  -webkit-background-clip: text;
+  background-clip: text;
+}
+.cat-head .en {
+  font-family: var(--ff-en);
+  font-size: clamp(19px, 3.4vw, 24px);
+  font-weight: 600;
+  letter-spacing: -0.01em;
+}
+.cat-head .jp { margin-left: auto; font-size: 13px; color: var(--fg-3); letter-spacing: 0.06em; }
+
+.grid { display: grid; gap: clamp(8px, 1.6vw, 13px); }
+.grid--2 { grid-template-columns: repeat(2, 1fr); }
+.grid--3 { grid-template-columns: repeat(2, 1fr); }
+@media (min-width: 720px) { .grid--3 { grid-template-columns: repeat(3, 1fr); } }
+
+/* real images fill the placeholder frames (cover, keep the aspect-ratio frame) */
+img.ph { width: 100%; height: 100%; object-fit: cover; }
+/* single-photo category — centered, constrained */
+.solo { max-width: 380px; margin: 0 auto; }
+
+/* ---- about (text only, centered) ------------------------------------- */
+.about { text-align: center; }
+.about .name {
+  font-family: var(--ff-jp);
+  font-weight: 500;
+  font-size: clamp(26px, 5vw, 36px);
+  letter-spacing: 0.05em;
+  margin-top: 18px;
+}
+.about .name .en {
+  font-family: var(--ff-en);
+  font-size: 0.42em;
+  font-weight: 500;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--fg-3);
+  margin-left: 12px;
+}
+.about .lead { margin: 22px auto 0; max-width: 560px; }
+.about .gear {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: 26px;
+  font-family: var(--ff-en);
+  font-size: 13px;
+  letter-spacing: 0.03em;
+  color: var(--fg-2);
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  padding: 9px 17px;
+}
+.about .gear b { color: var(--fg); font-weight: 600; }
+
+/* ---- instagram band --------------------------------------------------- */
+.ig-band { text-align: center; position: relative; overflow: hidden; }
+.ig-band::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(60% 110% at 82% 0%, rgba(236,105,60,0.16), transparent 55%),
+    radial-gradient(60% 110% at 10% 110%, rgba(43,58,168,0.22), transparent 52%);
+  pointer-events: none;
+}
+.ig-band .inner { position: relative; }
+.ig-band .lead { margin: 20px auto 0; max-width: 480px; }
+.ig-band .btn-wrap { margin-top: 32px; }
+.ig-band .handle {
+  margin-top: 20px;
+  font-family: var(--ff-en);
+  font-size: 13px;
+  letter-spacing: 0.18em;
+  color: var(--fg-3);
+}
+
+/* ---- contact ---------------------------------------------------------- */
+.contact { text-align: center; }
+.contact .lead { margin: 22px auto 0; max-width: 520px; }
+.contact .btn-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  justify-content: center;
+  margin-top: 30px;
+}
+
+/* ---- footer ----------------------------------------------------------- */
+.site-footer {
+  border-top: 1px solid var(--line-2);
+  padding: clamp(38px, 7vw, 60px) var(--pad);
+}
+.site-footer .inner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+  text-align: center;
+}
+.site-footer .fmark {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  font-family: var(--ff-en);
+  font-weight: 600;
+  font-size: 20px;
+}
+.site-footer .fmark .logo {
+  height: 20px; width: auto;
+  object-fit: contain;
+}
+.site-footer .flinks {
+  display: flex;
+  gap: 22px;
+  font-family: var(--ff-en);
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: 0.03em;
+  color: var(--fg-2);
+}
+.site-footer .flinks a:hover { color: var(--fg); }
+.site-footer .copy {
+  font-family: var(--ff-en);
+  font-size: 12px;
+  letter-spacing: 0.03em;
+  color: var(--fg-3);
+}
