@@ -108,37 +108,42 @@
           <h2 class="section-title">作品<span class="jp">Travel · Wildlife · Landscape · City</span></h2>
         </div>
 
-        <!-- 01 Travel -->
+        <!-- 01 Travel — 縦1（グランドリング）+ 横2（夕景/夜景）のモザイク -->
         <div class="cat">
           <div class="cat-head"><span class="num">01</span><span class="en">Travel</span><span class="jp">旅</span></div>
-          <div class="grid grid--2">
+          <div class="grid mz-split">
+            <img class="ph ph--fill" src="images/works/travel-03.jpg" alt="Travel — 大阪・関西万博 グランドリング" loading="lazy" />
             <img class="ph ph--wide" src="images/works/travel-01.jpg" alt="Travel — 万博の夕景" loading="lazy" />
             <img class="ph ph--wide" src="images/works/travel-02.jpg" alt="Travel — 万博の夜景" loading="lazy" />
           </div>
         </div>
 
-        <!-- 02 Wildlife -->
+        <!-- 02 Wildlife — 2×2 -->
         <div class="cat">
           <div class="cat-head"><span class="num">02</span><span class="en">Wildlife</span><span class="jp">動物・野鳥</span></div>
           <div class="grid grid--2">
             <img class="ph ph--tall" src="images/works/wildlife-01.jpg" alt="Wildlife — 雪のキツネ" loading="lazy" />
             <img class="ph ph--tall" src="images/works/wildlife-02.jpg" alt="Wildlife — キツネのポートレート" loading="lazy" />
+            <img class="ph ph--tall" src="images/works/wildlife-03.jpg" alt="Wildlife — シマリス" loading="lazy" />
+            <img class="ph ph--tall" src="images/works/wildlife-04.jpg" alt="Wildlife — ジョウビタキ" loading="lazy" />
           </div>
         </div>
 
-        <!-- 03 Landscape -->
+        <!-- 03 Landscape — 夕暮れの展望デッキをワイドで大きく＋縦2 -->
         <div class="cat">
           <div class="cat-head"><span class="num">03</span><span class="en">Landscape</span><span class="jp">風景</span></div>
-          <div class="grid grid--2">
+          <div class="grid mz-feature">
+            <img class="ph ph--wide" src="images/works/landscape-03.jpg" alt="Landscape — 夕暮れの展望デッキ" loading="lazy" />
             <img class="ph ph--tall" src="images/works/landscape-01.jpg" alt="Landscape — ネモフィラ" loading="lazy" />
             <img class="ph ph--tall" src="images/works/landscape-02.jpg" alt="Landscape — 工場と空" loading="lazy" />
           </div>
         </div>
 
-        <!-- 04 City · Street -->
+        <!-- 04 City · Street — 港の花火をワイドで大きく＋縦2 -->
         <div class="cat">
           <div class="cat-head"><span class="num">04</span><span class="en">City · Street</span><span class="jp">都市スナップ</span></div>
-          <div class="grid grid--2">
+          <div class="grid mz-feature">
+            <img class="ph ph--wide" src="images/works/city-03.jpg" alt="City — 港の花火と夜景" loading="lazy" />
             <img class="ph ph--tall" src="images/works/city-01.jpg" alt="City — 夜の路面電車（阪堺電車）" loading="lazy" />
             <img class="ph ph--tall" src="images/works/city-02.jpg" alt="City — ネオン街の流し撮り" loading="lazy" />
           </div>
@@ -236,6 +241,18 @@
     </div>
   </footer>
 
+  <!-- ===================================================================
+       LIGHTBOX — 作品をクリックで全画面表示（← → / ESC / スワイプ対応）
+       JS が有効な時だけ動作。無効なら通常のグリッド表示のまま。
+       =================================================================== -->
+  <div class="lb" id="lb" aria-hidden="true" role="dialog" aria-modal="true" aria-label="作品ビューア">
+    <button class="lb__btn lb__close" type="button" aria-label="閉じる">&times;</button>
+    <button class="lb__btn lb__nav lb__prev" type="button" aria-label="前の作品">&#8249;</button>
+    <img class="lb__img" id="lbImg" src="" alt="" />
+    <button class="lb__btn lb__nav lb__next" type="button" aria-label="次の作品">&#8250;</button>
+    <div class="lb__count" id="lbCount"></div>
+  </div>
+
   <!-- scroll fade-in (staggered, repeatable): each photo/text block fades in as it
        enters view, blocks entering together cascade top-to-bottom, and a block resets
        once fully off-screen so it fades in again next time. Rects are read before any
@@ -279,6 +296,60 @@
     window.addEventListener('scroll', scan, { passive: true });
     window.addEventListener('resize', scan, { passive: true });
     window.addEventListener('load', scan);
+  })();
+  </script>
+
+  <!-- lightbox: click a work to view it full-screen; navigate with the on-screen
+       arrows, ← → keys, or swipe on mobile. ESC or a background click closes it. -->
+  <script>
+  (function () {
+    var imgs = Array.prototype.slice.call(document.querySelectorAll('.works img.ph'));
+    if (!imgs.length) return;
+    var lb = document.getElementById('lb'),
+        lbImg = document.getElementById('lbImg'),
+        lbCount = document.getElementById('lbCount'),
+        idx = 0, lastFocus = null;
+    function show(i) {
+      idx = (i + imgs.length) % imgs.length;
+      var s = imgs[idx];
+      lbImg.src = s.currentSrc || s.src;
+      lbImg.alt = s.alt || '';
+      lbCount.textContent = (idx + 1) + ' / ' + imgs.length;
+    }
+    function open(i) {
+      lastFocus = document.activeElement;
+      show(i);
+      lb.classList.add('is-open');
+      lb.setAttribute('aria-hidden', 'false');
+      document.body.style.overflow = 'hidden';
+    }
+    function close() {
+      lb.classList.remove('is-open');
+      lb.setAttribute('aria-hidden', 'true');
+      document.body.style.overflow = '';
+      if (lastFocus && lastFocus.focus) lastFocus.focus();
+    }
+    imgs.forEach(function (im, i) {
+      im.addEventListener('click', function () { open(i); });
+    });
+    lb.querySelector('.lb__close').addEventListener('click', close);
+    lb.querySelector('.lb__prev').addEventListener('click', function (e) { e.stopPropagation(); show(idx - 1); });
+    lb.querySelector('.lb__next').addEventListener('click', function (e) { e.stopPropagation(); show(idx + 1); });
+    lb.addEventListener('click', function (e) { if (e.target === lb) close(); });
+    document.addEventListener('keydown', function (e) {
+      if (!lb.classList.contains('is-open')) return;
+      if (e.key === 'Escape') close();
+      else if (e.key === 'ArrowLeft') show(idx - 1);
+      else if (e.key === 'ArrowRight') show(idx + 1);
+    });
+    var x0 = null;
+    lb.addEventListener('touchstart', function (e) { x0 = e.touches[0].clientX; }, { passive: true });
+    lb.addEventListener('touchend', function (e) {
+      if (x0 === null) return;
+      var dx = e.changedTouches[0].clientX - x0;
+      if (Math.abs(dx) > 45) show(idx + (dx < 0 ? 1 : -1));
+      x0 = null;
+    }, { passive: true });
   })();
   </script>
 
